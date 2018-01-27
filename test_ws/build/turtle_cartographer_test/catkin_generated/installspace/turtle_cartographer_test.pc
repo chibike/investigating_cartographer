@@ -1,0 +1,8 @@
+prefix=/home/chibike/test_ws/install
+
+Name: turtle_cartographer_test
+Description: Description of turtle_cartographer_test
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/chibike/test_ws/install/lib 
+Requires: 

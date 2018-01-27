@@ -1,0 +1,24 @@
+<launch>
+  <param name="/use_sim_time" value="true" />
+  <param name="/slam_gmapping/angularUpdate" value="0.1" />
+  <param name="/slam_gmapping/linearUpdate" value="0.1" />
+  <param name="/slam_gmapping/lskip" value="10" />
+  <param name="/slam_gmapping/xmax" value="300" />
+  <param name="/slam_gmapping/xmin" value="-300" />
+  <param name="/slam_gmapping/ymax" value="300" />
+  <param name="/slam_gmapping/ymin" value="-300" />
+
+  <arg name="bag_filename" value="$(find turtle_cartographer_test)/test_bags/cartographer_turtlebot_demo.bag" />
+  
+  <include file="$(find turtlebot_bringup)/launch/minimal.launch" />
+
+  <include file="$(find turtlebot_navigation)/launch/gmapping_demo.launch" />
+
+  <node name="playbag" pkg="rosbag" type="play" args="--clock $(arg bag_filename)">
+    <remap from="laser_scan" to="scan" />
+  </node>
+
+  <!-- <include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch" /> -->
+  <node name="rviz" pkg="rviz" type="rviz" required="true"
+      args="-d $(find google_cartographer_test)/configuration_files/cartographer_mapping_rviz_config.rviz" />
+</launch>

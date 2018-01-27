@@ -1,0 +1,15 @@
+<launch>
+  <node name="cartographer_node" pkg="cartographer_ros"
+      type="cartographer_node" args="
+          -configuration_directory
+              $(find cartographer_turtlebot)/configuration_files
+          -configuration_basename turtlebot_urg_lidar_2d.lua"
+      output="screen"/>
+  
+  
+  <node name="rviz" pkg="rviz" type="rviz" required="true"
+      args="-d $(find google_cartographer_test)/configuration_files/cartographer_mapping_rviz_config_3.rviz" />
+  
+  <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+      type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+</launch>
